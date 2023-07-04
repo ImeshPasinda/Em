@@ -3,7 +3,8 @@ import {
     MenuUnfoldOutlined,
     UploadOutlined,
     UserOutlined,
-    VideoCameraOutlined,
+    TeamOutlined,
+    
   } from '@ant-design/icons';
   import { Button, Layout, Menu, theme } from 'antd';
   import { useState } from 'react';
@@ -31,7 +32,7 @@ import {
               },
               {
                 key: '2',
-                icon: <VideoCameraOutlined />,
+                icon: <TeamOutlined />,
                 label: 'nav 2',
               },
               {

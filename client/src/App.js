@@ -3,13 +3,14 @@ import {
   MenuUnfoldOutlined,
   UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
+  TeamOutlined,
   ClockCircleOutlined
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme, Space, Avatar, Badge } from 'antd';
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import AddemployeeScreen from './screens/AddemployeeScreen';
+import EmployeestableScreen from './screens/EmployeestableScreen';
 
 const { Header, Sider, Content } = Layout;
 
@@ -30,13 +31,13 @@ const App = () => {
           <Menu
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={['1']}
+            
           >
             <Menu.Item key="1" icon={<UserOutlined />}>
               <Link to="/add-employee">Add Employee</Link>
             </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              <Link to="/nav2">nav 2</Link>
+            <Menu.Item key="2" icon={<TeamOutlined />}>
+              <Link to="/employee-table">Employee Table</Link>
             </Menu.Item>
             <Menu.Item key="3" icon={<UploadOutlined />}>
               <Link to="/nav3">nav 3</Link>
@@ -71,6 +72,7 @@ const App = () => {
           >
             <Routes>
               <Route path="/add-employee" exact element={<AddemployeeScreen />} />
+              <Route path="/employee-table" exact element={<EmployeestableScreen />} />
             </Routes>
           </Content>
         </Layout>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from "react";
 
 
-
+let employeeCount;
 
 
 const layout = {
@@ -28,7 +28,7 @@ const validateMessages = {
 
 const AddemployeeScreen = () => {
 
-
+  const [employeeCount, setEmployeeCount] = useState(0);
   const [messageApi, contextHolder] = message.useMessage();
 
 
@@ -50,6 +50,9 @@ const AddemployeeScreen = () => {
       axios.get("http://localhost:8070/api/employee/getallemployees").then((res) => {
 
         console.log(res.data);
+        const count = res.data.length;
+        setEmployeeCount(count);
+
       }).catch((err) => {
         console.log(err.message);
       });
@@ -138,7 +141,7 @@ const AddemployeeScreen = () => {
       <Col span={12}>
         <Row gutter={16}>
           <Col span={12}>
-            <Statistic title="Active Users" value={112893} />
+            <Statistic title="Active Employees" value={employeeCount} />
           </Col>
           <Col span={12}>
             <Statistic title="Account Balance (CNY)" value={112893} precision={2} />
