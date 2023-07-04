@@ -5,6 +5,7 @@ const employeeSchema = mongoose.Schema({
     name: { type: String, require },
     email: { type: String, require },
     age: {type: Number, require},
+    address: { type: String, require },
     portfolioLink: { type: String, require },
     jobPosition: { type: String, require },
     introduction: { type: String, require },

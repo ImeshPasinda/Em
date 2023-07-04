@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import AddemployeeScreen from './screens/AddemployeeScreen';
 import EmployeestableScreen from './screens/EmployeestableScreen';
+import HomeScreen from './screens/HomeScreen';
 
 const { Header, Sider, Content } = Layout;
 
@@ -26,12 +27,15 @@ const App = () => {
       <Layout>
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div className="demo-logo-vertical" />
-          <center><h1 style={{ color: 'white', fontSize: '24px', fontFamily: 'Gilroy' }}>Em</h1></center>
+          <center><Link to="/">
+            <h1 style={{ color: 'white', fontSize: '24px', fontFamily: 'Gilroy' }}>Em</h1>
+          </Link>
+          </center>
 
           <Menu
             theme="dark"
             mode="inline"
-            
+
           >
             <Menu.Item key="1" icon={<UserOutlined />}>
               <Link to="/add-employee">Add Employee</Link>
@@ -71,6 +75,7 @@ const App = () => {
             }}
           >
             <Routes>
+              <Route path="/" element={<HomeScreen />} />
               <Route path="/add-employee" exact element={<AddemployeeScreen />} />
               <Route path="/employee-table" exact element={<EmployeestableScreen />} />
             </Routes>

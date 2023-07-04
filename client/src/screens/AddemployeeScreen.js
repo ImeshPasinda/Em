@@ -117,6 +117,9 @@ const AddemployeeScreen = () => {
           >
             <InputNumber />
           </Form.Item>
+          <Form.Item name={['employee', 'address']} label="Address">
+            <Input />
+          </Form.Item>
           <Form.Item name={['employee', 'portfolioLink']} label="Portfolio Link">
             <Input />
           </Form.Item>

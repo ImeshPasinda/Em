@@ -1,78 +1,99 @@
-import {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    UploadOutlined,
-    UserOutlined,
-    TeamOutlined,
-    
-  } from '@ant-design/icons';
-  import { Button, Layout, Menu, theme } from 'antd';
-  import { useState } from 'react';
-  const { Header, Sider, Content } = Layout;
-  const App = () => {
-    const [collapsed, setCollapsed] = useState(true);
-    const {
-      token: { colorBgContainer },
-    } = theme.useToken();
+import { Badge, Calendar } from 'antd';
+const getListData = (value) => {
+  let listData;
+  switch (value.date()) {
+    case 8:
+      listData = [
+        {
+          type: 'warning',
+          content: 'This is warning event.',
+        },
+        {
+          type: 'success',
+          content: 'This is usual event.',
+        },
+      ];
+      break;
+    case 10:
+      listData = [
+        {
+          type: 'warning',
+          content: 'This is warning event.',
+        },
+        {
+          type: 'success',
+          content: 'This is usual event.',
+        },
+        {
+          type: 'error',
+          content: 'This is error event.',
+        },
+      ];
+      break;
+    case 15:
+      listData = [
+        {
+          type: 'warning',
+          content: 'This is warning event',
+        },
+        {
+          type: 'success',
+          content: 'This is very long usual event。。....',
+        },
+        {
+          type: 'error',
+          content: 'This is error event 1.',
+        },
+        {
+          type: 'error',
+          content: 'This is error event 2.',
+        },
+        {
+          type: 'error',
+          content: 'This is error event 3.',
+        },
+        {
+          type: 'error',
+          content: 'This is error event 4.',
+        },
+      ];
+      break;
+    default:
+  }
+  return listData || [];
+};
+const getMonthData = (value) => {
+  if (value.month() === 8) {
+    return 1394;
+  }
+};
+const App = () => {
+  const monthCellRender = (value) => {
+    const num = getMonthData(value);
+    return num ? (
+      <div className="notes-month">
+        <section>{num}</section>
+        <span>Backlog number</span>
+      </div>
+    ) : null;
+  };
+  const dateCellRender = (value) => {
+    const listData = getListData(value);
     return (
-      <Layout>
-        <Sider trigger={null} collapsible collapsed={collapsed}>
-          <div className="demo-logo-vertical" />
-          <h1 style={{ color: 'white', fontSize: '24px', fontFamily: 'Gilroy' }}>Em</h1>
-
-          <Menu
-            theme="dark"
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            items={[
-              {
-                key: '1',
-                icon: <UserOutlined />,
-                label: 'Add Employee',
-              },
-              {
-                key: '2',
-                icon: <TeamOutlined />,
-                label: 'nav 2',
-              },
-              {
-                key: '3',
-                icon: <UploadOutlined />,
-                label: 'nav 3',
-              },
-            ]}
-          />
-        </Sider>
-        <Layout>
-          <Header
-            style={{
-              padding: 0,
-              background: colorBgContainer,
-            }}
-          >
-            {/* <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              style={{
-                fontSize: '16px',
-                width: 64,
-                height: 64,
-              }}
-            /> */}
-          </Header>
-          <Content
-            style={{
-              margin: '24px 16px',
-              padding: 24,
-              minHeight: 280,
-              background: colorBgContainer,
-            }}
-          >
-            Content
-          </Content>
-        </Layout>
-      </Layout>
+      <ul className="events">
+        {listData.map((item) => (
+          <li key={item.content}>
+            <Badge status={item.type} text={item.content} />
+          </li>
+        ))}
+      </ul>
     );
   };
-  export default App;
+  const cellRender = (current, info) => {
+    if (info.type === 'date') return dateCellRender(current);
+    if (info.type === 'month') return monthCellRender(current);
+    return info.originNode;
+  };
+  return <Calendar cellRender={cellRender} />;
+};
+export default App;
